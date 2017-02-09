@@ -1,0 +1,254 @@
+{
+	"id": "f2b95f39-c48e-d80c-3c5f-6049efb2273e",
+	"name": "Hackdoodles",
+	"description": "",
+	"order": [
+		"fad3e473-3caf-2654-02d6-ae2dd97a6a17",
+		"3ef834f2-4db1-d4a3-4660-fba191350612",
+		"356d4d31-e7ee-844d-5104-11d8ae22a191",
+		"8059a314-5cfd-40ea-f6e3-2b256326cefc",
+		"bf129066-caa9-f03e-c51c-3001a65fd38c",
+		"4e10634e-35c5-22ba-d811-432e4100c6db",
+		"f49e561d-c5ad-f5f2-e102-2550106b4254",
+		"fa12ecdc-4ff6-f5e3-4e56-dd6a2cfb8dc0",
+		"ae287b05-feab-90fb-76c5-648a96115000"
+	],
+	"folders": [],
+	"timestamp": 0,
+	"owner": "337090",
+	"public": false,
+	"requests": [
+		{
+			"id": "356d4d31-e7ee-844d-5104-11d8ae22a191",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/create",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "nodelogo",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "imagen",
+					"value": "./nodelogo.jpg",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "var response = JSON.parse(responseBody);\npostman.setGlobalVariable(\"id\",response.data._id);\ntests[\"Create:expect created\"] = responseCode.code === 201;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486614182527,
+			"name": "Create: expect sucess",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "3ef834f2-4db1-d4a3-4660-fba191350612",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/fe9ab3166cc57816c03b3e7f",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "name",
+					"value": "video",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "imagen",
+					"value": "./nodelogo.jpg",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "tests[\"Show one:expect notFound\"] = responseCode.code === 404;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486613775718,
+			"name": "Show one: expect notFound",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "4e10634e-35c5-22ba-d811-432e4100c6db",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/update/fe9ab3166cc57816c03b3e7f",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "name",
+					"value": "nodelogocambiado",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "tests[\"Update:expect notFound\"] = responseCode.code === 404;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486614255693,
+			"name": "Update: expect notFound",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "8059a314-5cfd-40ea-f6e3-2b256326cefc",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/create",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "nodelogo",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "imagen",
+					"value": "./nodelogo.jpg",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "tests[\"Create:expect conflict\"] = responseCode.code === 409;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486614204477,
+			"name": "Create: expect conflict",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "ae287b05-feab-90fb-76c5-648a96115000",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "name",
+					"value": "video",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "imagen",
+					"value": "./nodelogo.jpg",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "var response = JSON.parse(responseBody);\n\ntests[\"Show all:expect success\"] = responseCode.code === 200;\ntests[\"expect:data empty\"] = response.data.length === 0;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486615853728,
+			"name": "Show all:expect success copy",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "bf129066-caa9-f03e-c51c-3001a65fd38c",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/update/{{id}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "name",
+					"value": "nodelogocambiado",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "tests[\"Update:expect success\"] = responseCode.code === 200;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486614220637,
+			"name": "Update: expect success",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "f49e561d-c5ad-f5f2-e102-2550106b4254",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/delete/fe9ab3166cc57816c03b3e7f",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"tests": "tests[\"Delete:expect notFound\"] = responseCode.code === 404;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486615039892,
+			"name": "Delete: expect notFound",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "fa12ecdc-4ff6-f5e3-4e56-dd6a2cfb8dc0",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/delete/{{id}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"tests": "tests[\"Delete:expect success\"] = responseCode.code === 200;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486615037545,
+			"name": "Delete: expect success",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		},
+		{
+			"id": "fad3e473-3caf-2654-02d6-ae2dd97a6a17",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "http://localhost:3000/api/v1/hackdoodles/",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "name",
+					"value": "video",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "imagen",
+					"value": "./nodelogo.jpg",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "tests[\"Show all:expect success\"] = responseCode.code === 200;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486614132093,
+			"name": "Show all:expect success",
+			"description": "",
+			"collectionId": "f2b95f39-c48e-d80c-3c5f-6049efb2273e"
+		}
+	]
+}

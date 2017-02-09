@@ -1,0 +1,41 @@
+{
+  "name": "Hackdoodles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.0",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "connect-mongo": "^1.3.2",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.0",
+    "gridfs-stream": "^1.1.1",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.8.1",
+    "multer": "^1.3.0",
+    "skipper": "^0.8.0",
+    "skipper-gridfs": "^0.5.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "jquery": "^3.1.1",
+    "newman": "^3.4.3",
+    "nodemon": "^1.11.0",
+    "webpack": "^2.2.1",
+    "webpack-notifier": "^1.5.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "start:watch": "nodemon app.js",
+    "clean": "mongo use test",
+    "webpack:build": "webpack --progress --color --display-error-details --bail",
+    "webpack:watch": "webpack --progress --color --watch --display-error-details",
+    "test:api": "newman run  Hackdoodles.postman_collection.json --bail"
+  },
+  "author": "HackdoFoundation",
+  "license": "GNU"
+}
