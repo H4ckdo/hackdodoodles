@@ -8,6 +8,7 @@ const FileServeController = require('./controllers/fileserve.js');
 const HackdoModel = require('./model/hackdo.js');
 const dispatchModel = require('./utils.js').dispatchModel;
 const bodyParser = require('body-parser');
+const newman = require('newman');
 
 app.use(express.static('./public'));
 
@@ -28,6 +29,18 @@ dbconnection(app, function(err, connection) {
   let h4ckdo = HackdoModel(connection);
   new hackdoController(app, h4ckdo, connection);
   new FileServeController(app, h4ckdo, connection);
+  if(process.env.STAGING) {
+    newman.run({
+      collection: require('./Hackdoodles.postman_collection.json'),
+  	  reporters: 'cli',
+      bail: true
+    }, function (err) {
+      if (err) { throw err; }
+  	  console.log('collection run complete!');
+      process.exit(0);
+  	});    
+  }
+
 })
 
 
