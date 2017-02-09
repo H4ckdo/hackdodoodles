@@ -35,9 +35,13 @@ dbconnection(app, function(err, connection) {
   	  reporters: 'cli',
       bail: true
     }, function (err) {
-      if (err) { throw err; }
-  	  console.log('collection run complete!');
-      process.exit(0);
+      if (err) { 
+        throw err; 
+        process.exit(1);
+      } else {
+    	  console.log('collection run complete!');
+        process.exit(0);        
+      }
   	});    
   }
 
