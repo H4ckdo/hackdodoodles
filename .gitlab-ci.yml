@@ -15,10 +15,11 @@ test:
 
 deploy:
   type: deploy
-  image: ruby:2.1
+  image: ruby:2.3.3
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
+  - apt-get update
   - gem install dpl
   - dpl --provider=heroku --skip_cleanup=true --app=hackdoddles --api-key=$HEROKU_STAGING_API_KEY
   only:
