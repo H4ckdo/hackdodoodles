@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Make backup
 # -b=true -d=<database> -u=<user> -p=<passoword>
 
@@ -50,7 +50,7 @@ done
 if [ -n $BACKUP ]; then
   if [ "$BACKUP" == "true" ]; then
     echo "Attempting backup..."
-        mongodump -h ds141209.mlab.com:41209 -d $DATABASE -u $USER -p $PASSWORD -o ./backups/$DATE >> ./backups/log.txt 2>&1
+        mongodump -h ds141209.mlab.com:41209 --db $DATABASE -u $USER -p $PASSWORD -o ./backups/$DATE >> ./backups/log.txt 2>&1
         sed -i -e '$a Backup finish at: '$DATE ./backups/log.txt 2>&1
         cat ./backups/log.txt
 

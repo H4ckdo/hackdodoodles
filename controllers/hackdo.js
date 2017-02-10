@@ -19,7 +19,16 @@ class HackdoController {
   }//end contructor
 
   showAll(req, res) {  
-    res.dispatchModel(this.HackdoModel.find({}));
+    let responseCases = {
+      success: {
+        message: {
+          href:this.test,
+          test:"holamundo"
+        }
+      }
+    };
+
+    res.dispatchModel(this.HackdoModel.find({}), responseCases);
   }//end showAll
 
   show(req, res) {    
