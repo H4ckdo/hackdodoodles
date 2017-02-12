@@ -35,8 +35,8 @@
   "scripts": {
     "start": "node app.js",
     "start:watch": "nodemon app.js",
-    "webpack:build": "webpack --progress --color --display-error-details --bail",
-    "webpack:watch": "webpack --progress --color --watch --display-error-details",
+    "webpack:build": "./node_modules/.bin/webpack --progress --color --display-error-details --bail",
+    "webpack:watch": "./node_modules/.bin/webpack --progress --color --watch --display-error-details",
     "test:api": "newman run  Hackdoodles.postman_collection.json --bail"
   },
   "author": "HackdoFoundation",
