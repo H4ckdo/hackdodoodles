@@ -8,8 +8,7 @@ stages:
 build:
   type: build
   script:
-  - npm install webpack
-  - npm install -g webpack  
+  - npm install --only=dev
   - npm run webpack:build
 
 
