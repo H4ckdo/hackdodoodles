@@ -1,12 +1,13 @@
 #!/bin/bash
-# Make backup
-# -b=true -d=<database> -u=<user> -p=<passoword>
 
+#start service: sudo service mongod start
+#host: ds141209.mlab.com:41209
+# Make backup
+# -b=true -h=<host> -d=<database> -u=<user> -p=<passoword>
 
 # Sycronize
 # Local: -s=true -l=true -d=<database> -f=<path/to/backup>
-# Production: -s=true -d=<database> -f=<path/to/backup> -u=<user> -p=<password>
-
+# Production: -s=true -d=<database> -h=<host> -f=<path/to/backup> -u=<user> -p=<password>
 
 DATE=`date +%Y_%m_%d_%H_%M_%S`
 BACKUP=false
@@ -37,6 +38,10 @@ case $i in
     FOLDER="${i#*=}"
     shift # past argument=value
     ;;
+    -h=*|--host=*)
+    HOST="${i#*=}"
+    shift # past argument=value
+    ;;
     -u=*|--user=*)
     USER="${i#*=}"
     shift # past argument=value
@@ -50,7 +55,7 @@ done
 if [ -n $BACKUP ]; then
   if [ "$BACKUP" == "true" ]; then
     echo "Attempting backup..."
-        mongodump -h ds141209.mlab.com:41209 --db $DATABASE -u $USER -p $PASSWORD -o ./backups/$DATE >> ./backups/log.txt 2>&1
+        mongodump -h $HOST --db $DATABASE -u $USER -p $PASSWORD -o ./backups/$DATE >> ./backups/log.txt 2>&1
         sed -i -e '$a Backup finish at: '$DATE ./backups/log.txt 2>&1
         cat ./backups/log.txt
 
@@ -62,7 +67,7 @@ if [ -n $BACKUP ]; then
         mongorestore --drop --db $DATABASE ./backups/"$FOLDER"/$DATABASE
       else
         echo "Attempting synchronisation to production..."
-        mongorestore --drop -h ds141209.mlab.com:41209 -d $DATABASE -u $USER -p $PASSWORD ./backups/"$FOLDER"/$DATABASE >> Synchronisation.md
+        mongorestore --drop -h $HOST -d $DATABASE -u $USER -p $PASSWORD ./backups/"$FOLDER"/$DATABASE 
       fi
     fi
   fi
