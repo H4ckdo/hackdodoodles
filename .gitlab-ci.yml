@@ -8,8 +8,8 @@ stages:
 build:
   type: build
   script:
+  - npm install  
   - npm install --only=dev
-  - npm install style-loader node-sass css-loader
   - npm run webpack:build
 
 
