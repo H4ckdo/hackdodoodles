@@ -8,7 +8,6 @@ stages:
 build:
   type: build
   script:
-  - npm install  
   - npm install --only=dev
   - npm run webpack:build
 
@@ -18,7 +17,7 @@ test:
   script:
   - apt-get update -qy
   - npm install
-  - npm install --only=dev
+  - npm install newman
   - node app.js
 
 
