@@ -18,12 +18,15 @@ class HackdoController {
     app.route(`${path}/delete/:id`).delete(this.delete.bind(this));//delete
   }//end contructor
 
-  showAll(req, res) {  
-    let responseCases = {
+  showAll(req, res) { 
+    let HackdoModel = this.HackdoModel;
+    let responseCases =  {
       success: {
-        message: {
-          href:this.test,
-          test:"holamundo"
+        model: HackdoModel,
+        omit:['__v', '_id'],
+        map:(document)=> {
+          document.href = `/fs/download/${document.ref}`;
+          return document;
         }
       }
     };
@@ -37,6 +40,7 @@ class HackdoController {
   }//end show
 
   create(req, res) {
+    let HackdoModel = this.HackdoModel;
     let file = req.file;
     if(!file) return res.json({
       status: 400,
@@ -53,14 +57,16 @@ class HackdoController {
     req.body.ref = stream.id;
     req.body.mimetype = stream.options.content_type;
 
-    let hackdo = new this.HackdoModel(req.body);
+    let hackdo = new HackdoModel(req.body);
     res.dispatchModel(hackdo.save().then(docs => {
       stream.write(file.buffer);
       stream.end();  
       return docs;
     }),{
       success: {
-        status: 201
+        status: 201,
+        omit: ['_id'],
+        model: HackdoModel
       }
     });      
   }//end create

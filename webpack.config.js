@@ -23,7 +23,12 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
       }
+
     ]
   },
   plugins: [
@@ -34,4 +39,5 @@ module.exports = {
       "window.jQuery": "jquery"
     }),
   ]
-}
+
+};

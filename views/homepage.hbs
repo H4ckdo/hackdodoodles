@@ -1,3 +1,26 @@
-<section>
-  <h1>Homepage</h1>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <script src="/js/homepage.bundle.js"></script>
+</head>
+<body>
+  <section class="container-doodles">
+    {{#each data}}
+      <a href="/fs/download/{{ref}}" target="_blanck">
+        <div class="doodles" >
+          <img class="image" src="/fs/download/{{ref}}" alt="{{name}}">
+          <div class="wrap-content">         
+            <strong class="name">{{name}}</strong>
+            <div class="wrap-text">
+              <small class="createAt">{{createAt}}</small>
+              <p class="description">{{description}}</p>                        
+            </div>
+          </div>
+        </div>   
+      </a>        
+    {{/each}}
+  </section>  
+</body>
+</html>

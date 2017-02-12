@@ -6,8 +6,12 @@ const HackdoSchema = new Schema({
   name: {
     type: String,
     required: true,
-    index: { unique: true } 
+    index: { unique: true },
   },  
+  createAt : {
+    type: Date,
+    default: new Date()
+  },
   mimetype: {
     type: String
   },
@@ -15,11 +19,8 @@ const HackdoSchema = new Schema({
     type: String
   },
   description: {
-    type: String
-  },
-  imagen: {
-    data: Buffer, 
-    contentType: String
+    type: String,
+    default: ''
   }
 });
 

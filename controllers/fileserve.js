@@ -13,6 +13,8 @@ class FileServeController {
     image.then(docs => {
       if(docs) {    
         res.type(docs.mimetype);
+        console.log(docs.mimetype)
+
         var readstream = this.gfs.createReadStream({_id: ref});
         readstream.pipe(res);
       } else {

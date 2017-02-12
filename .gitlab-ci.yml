@@ -2,7 +2,14 @@ image: node:7.5.0
 
 stages:
   - test
+  - build
   - deploy
+
+build:
+  type: build
+  script:
+  - npm run webpack:build
+
 
 test:
   type: test
