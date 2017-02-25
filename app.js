@@ -24,10 +24,9 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({
-  extended: true,
-  limit:'50mb'
+  extended: true
 }));
-app.use(bodyParser.json({limit:'50mb'}));
+app.use(bodyParser.json());
 
 
 app.use("*",(req, res, next)=> { 

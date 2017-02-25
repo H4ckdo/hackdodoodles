@@ -16,7 +16,7 @@ module.exports = {
     const notFound = _.extend({details: `Resource not found.`, status: 404}, options.errors.notFound);
     const serverError = _.extend({details: `Internal server error.`, status: 500}, options.errors.serverError);
     const forbidden = _.extend({details: `Action forbidden.`, status: 403}, options.errors.forbidden);
-    const badRequest = _.extend({details: `Bad request`, status: 400}, options.errors.badRequest || {});
+    const badRequest = _.extend({details: `Bad request`, status: 400}, options.errors.badRequest);
     const conflict = _.extend({status: 409, details: `Resource in conflict`}, options.errors.conflict);
     const notAllow = _.extend({status: 405, details: `Action not allow`}, options.errors.notAllow);
 
@@ -65,13 +65,16 @@ module.exports = {
 
         let isMongooseDocument = response.data instanceof options.success.model;
         if(_.isArray(response.data)) isMongooseDocument = response.data[0] instanceof options.success.model;
+        console.log(response, 'response');
 
         if(isMongooseDocument) {
           let options = {getters: true};
           if(_.isArray(response.data)) {
             response.data = _.map(response.data,doc => doc.toObject(options));             
           } else {
-            response.data = response.data.toObject(options);
+            if(Object.keys(response.data).length != 0 && response.data.toObject) {
+              response.data = response.data.toObject(options);
+            }
           }
         };
 
@@ -155,7 +158,7 @@ module.exports = {
         const response = {data: null};
         if(err.code === 11000 || (err.hasOwnProperty('originalError') && err.originalError.code === 11000)) {
           _.extend(response, {error: conflict});
-          if(options.error.conflict.hasOwnProperty('view')) return res.render(options.error.conflict.view, {data: response.error});//Render view in case of error
+          if(options.errors.conflict.hasOwnProperty('view')) return res.render(options.error.conflict.view, {data: response.error});//Render view in case of error
           res.status(409);
           return res.json(response);
           /*
