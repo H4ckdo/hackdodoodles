@@ -6,7 +6,27 @@ const Grid = require('gridfs-stream');
 mongoose.Promise = require('bluebird');
 
 module.exports = function connection(app, cb) {
-  var connection = mongoose.connect(URI);
+  let connection;
+  let options = { 
+    server: { 
+      socketOptions: { 
+        keepAlive: 300000, connectTimeoutMS: 30000 
+      } 
+    }, 
+    replset: { 
+      socketOptions: { 
+        keepAlive: 300000, 
+        connectTimeoutMS : 30000 
+      } 
+    } 
+  };
+
+  if(production.MONGO_URI) {
+    connection = mongoose.connect(URI, options);
+  } else {
+    connection = mongoose.connect(URI);    
+  }
+
   if(development.collectionsDrop) {
     mongoose.connection.dropDatabase();   
   };
