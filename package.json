@@ -1,7 +1,7 @@
 {
   "name": "Hackdoodles",
   "version": "1.0.0",
-  "description": "Quibfojs devOps example, exposition perfomance by @sneyder_a",
+  "description": "Quibdojs simple devOps example, exposition perfomance by @sneyder_a",
   "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.0",
